@@ -7,13 +7,30 @@ call vundle#rc()
 " let Vundle manage Vundle
 " required!
 Bundle 'gmarik/vundle'
+
+" General Plugins
 Bundle 'scrooloose/nerdtree'
+Bundle 'ervandew/supertab'
+Bundle 'bling/vim-airline' 
+"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
+
+"Color Schemes
 Bundle 'molokai'
 Bundle 'tpope/vim-vividchalk'
-Bundle 'tpope/vim-rails'
-"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
-Bundle 'bling/vim-airline'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'Lokaltog/vim-distinguished'
+
+" Web development plugins
+Bundle 'mattn/emmet-vim'
+Bundle 'plasticboy/vim-markdown'
+
+" Python plugins
+Bundle 'davidhalter/jedi-vim'
+Bundle 'klen/python-mode'
+
+" turn python-mode auto-complete off so doesnt conflict with jedi
+let g:pymode_rope_completion = 0
+
 
 filetype plugin indent on     " required!
 syntax on
@@ -43,12 +60,16 @@ set textwidth=79
 
 
 if has ('gui_running')
-    colorscheme railscasts
-    "colo molokai
+    "colorscheme railscasts
+    "colorscheme molokai
+    colorscheme solarized
+    set background=dark
 else
     " set vim colors to work on terminal
     set t_Co=256
-    colorscheme distinguished
+    set background=dark
+    "colorscheme distinguished
+    colorscheme solarized
 endif
 set guifont=Source\ Code\ Pro\ 11
 
@@ -75,32 +96,17 @@ imap jj <ESC>
 nmap <leader>q :wqa!<CR>
 nmap <leader>w :w!<CR>
 nmap <leader><Esc> :q!<CR>
-
-" Execute current buffer as ruby
-map <leader>r :w !ruby<CR>
+nmap <Leader>gcc :! gcc %
 
 " Maps autocomplete to tab
 imap <Tab> <C-N>
 " Snippets are activated by Shift+Tab
 let g:snippetsEmu_key = "<S-Tab>"
 
-map <C-v> "+gP<CR>
-vmap <C-c> "+y
+nmap <leader>p "+p
+nmap <leader>y "+y
 
-" Leader shortcuts for Rails commands
-map <Leader>m :Rmodel
-map <Leader>c :Rcontroller
-map <Leader>v :Rview
-map <Leader>u :Runittest
-map <Leader>f :Rfunctionaltest
-map <Leader>tm :RTmodel
-map <Leader>tc :RTcontroller
-map <Leader>tv :RTview
-map <Leader>tu :RTunittest
-map <Leader>tf :RTfunctionaltest
-map <Leader>sm :RSmodel
-map <Leader>sc :RScontroller
-map <Leader>sv :RSview
-map <Leader>su :RSunittest
-map <Leader>sf :RSfunctionaltest
-
+" Python plugins keybinds
+nmap <leader>r :! python %<CR>
+nmap <leader>c :PymodeLint<CR>
+nmap <leader>f :PymodeLintAuto<CR>
