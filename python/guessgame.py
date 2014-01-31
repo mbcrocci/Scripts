@@ -17,11 +17,9 @@ def get_guess(player_id):
 
 def evaluate(guess, number):
 
-    if guess < number:
-        return "Higher than that"
+    if guess < number: return "Higher than that"
 
-    elif guess > number:
-        return "Lower than that"
+    elif guess > number: return "Lower than that"
 
     else: return 0
 
