@@ -8,7 +8,7 @@ while true
   type = string[1]
   price = string[0].to_i
 
-  if price < 0
+  if price <= 0
     break
 
   else

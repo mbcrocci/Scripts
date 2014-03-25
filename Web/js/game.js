@@ -162,7 +162,6 @@ function jungla () {
       switch (action){
 
         case "sur": alert("No puedes"); break; jungla();
-
         case "oeste": monstruo("monstruo", monstruo("tigre", desierto())); break;
         case "norte": monstruo("tigre", desierto()); break;
         case "este" : monstruo("monos", monstruo("tigre", desierto())); break;
