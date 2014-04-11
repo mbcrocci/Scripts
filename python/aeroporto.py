@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import time
 class Tempo:
 	"""Caracteristicas da hora de saida de um voo"""
@@ -22,41 +24,42 @@ def menu ():
 	"""Mostra um menu para o utilizador escolher o que fazer"""
 	tempo = hora_actual()
 
-	print 'Hora: %d:%d' %(tempo.tm_hour, tempo.tm_min)
-
-	print "1 - Introduzir novo voo"
-	print "2 - Listar todos os voos"
-	print "3 - Listar proximos voos"
-	print "4 - Actualizar tabela de voos"
-	print "5 - Terminar"
+	print("")
+	print("Hora: %d:%d" %(tempo.tm_hour, tempo.tm_min))
+	print("1 - Introduzir novo voo")
+	print("2 - Listar todos os voos")
+	print("3 - Listar proximos voos")
+	print("4 - Actualizar tabela de voos")
+	print("5 - Terminar")
+	print("")
 
 	op = 0
 	while op<1 or  op>5:
-		op = int(raw_input("Opcao: ")) 
-
+		op = int(input("Opcao: "))
+	print("")
 	return op
 
-def adicionar_voo():a
-	"""Pedes todos os atributos de um novo Voo"""
+def adicionar_voo():
+	"""Pede todos os atributos de um novo Voo"""
 
 	novo = Voo(0, 0, 0, 0) #Cria nova instacia da class Voo
-	novo.numero = int(raw_input('Introduza o numero do voo: '))
-	novo.companhia = raw_input('Introduza a companhia: ')
-	novo.destino = raw_input('Introduza o destino: ')
+	novo.numero = int(input('Introduza o numero do voo: '))
+	novo.companhia = input('Introduza a companhia: ')
+	novo.destino = input('Introduza o destino: ')
 	novo.tempo = Tempo(0, 0)
-	novo.tempo.hora = int(raw_input('Introduza a hora: '))
-	novo.tempo.minuto = int(raw_input('Introduza o minuto: '))
+	novo.tempo.hora = int(input('Introduza a hora: '))
+	novo.tempo.minuto = int(input('Introduza o minuto: '))
 
 	return novo
 
 def mostra_todos(lista):
 	"""Percorre a lista inteira e mostra de forma organizada"""
 	for obj in lista:
-		print 'Numero:', obj.numero
-		print 'Companhia:', obj.companhia
-		print 'Destino:', obj.destino
-		print 'Hora: %d:%d' %(obj.tempo.hora, obj.tempo.minuto)
-		print '\n'
+		print('Numero:', obj.numero)
+		print('Companhia:', obj.companhia)
+		print('Destino:', obj.destino)
+		print('Hora: %d:%d' %(obj.tempo.hora, obj.tempo.minuto))
+		print("")
 
 def mostra_proximos(lista):
 	"""Ainda precisa de ser feita"""
@@ -82,7 +85,6 @@ def main ():
 	j = 0
 	while j != 5:
 		j = menu()
-
 		if j == 1:
 			lista_de_voos.append(adicionar_voo())
 
@@ -97,3 +99,4 @@ def main ():
 
 if __name__ == "__main__":
     main()
+	
