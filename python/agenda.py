@@ -1,59 +1,96 @@
+
 #!/usr/bin/env python3
 
-class Pessoa ():
-	def __init__ (self, nome, rede, numero):
-		self.nome = nome
-		self.rede = rede
-		self.numero = numero
+class Person ():
+
+    def __init__(self, name, provider, number):
+        self.name = name
+        self.provider = provider
+        self.number = number
 
 
-def criar_contacto (lista):
-	obj = Pessoa(0, 0, 0)
+def new_contact():
+    new = Person(0, 0, 0)
 
-	obj.nome = input("Nome: ")
-	obj.rede = input("Rede: ")
-	obj.numero = int(input("Numero: "))
+    new.name = input("Name: ").lower()
+    new.provider = input("Provider: ").lower()
+    new.number = input("Number: ")
+    print("")
 
-
-def listar_rede (lista, rede):
-	for obj in lista:
-		if obj.rede == rede:
-			print (obj)
+    return new
 
 
-def mesma_casa (lista):
-	for obj in lista:
-		for obj2  in lista:
-			if obj2.numero == obj.numero:
-				print (obj.nome," vive na mesma casa que:",obj2.nome)
+def search_provider(lista, provider):
+    for obj in lista:
+        if obj.provider == provider:
+            print (obj.name, "has ", obj.provider)
 
-def menu ():
-	print ("1 - Adicionar contacto")
-	print ("2 - Procurar pessoas de uma rede")
-	print ("3 - Procurar pessoas que vivem na mesma casa")
-	print ("4 - Sair")
 
-	op = 0
-	while 1>op or op>4:
-		op = int(input("Opcao: "))
+def same_number(lista):
+    for obj in lista:
+        for obj2 in lista:
+            if obj.number == obj2.number and obj.name != obj2.name and obj != obj2:
+                print (obj.name, " has the same number as:", obj2.name)
 
-	return op
+
+def all_contacts(lista):
+    for obj in lista:
+        print("Name: ", obj.name)
+        print("Provider: ", obj.provider)
+        print("Number :", obj.number)
+        print("")
+
+
+def menu():
+
+    print ("\n1 - Add new contact")
+    print ("2 - Search people with same provider")
+    print ("3 - Search people with same number")
+    print ("4 - Print all contacts")
+    print ("5 - Exit\n")
+
+    op = 0
+    while 1 > op or op > 5:
+        op = int(input("Option: "))
+        print("")
+
+    return op
+
 
 def main():
-	op = 0
-	lista = []
+    contacts = []
 
-	while op != 4:
-		op = menu()
-		if op == 1:
-			lista.append(criar_contacto(lista))
+    # Add file contents to contacts list
+    with open("contacts.txt", 'r') as f:
+        for line in f:
+            try:
+                obj = Person(0, 0, 0)
+                obj.name, obj.provider, obj.number = line.split(' ')
 
-		elif op == 2:
-			listar_rede(lista,  input("Rede: "))
+                contacts.append(obj)
+            except ValueError:
+                pass  # if there is an emprty line it passes to the next one
 
-		elif op == 3:
-			mesma_casa(lista)
+    op = 0
+    while op != 5:
+        op = menu()
 
+        if op == 1:
+            contacts.append(new_contact())
+
+        elif op == 2:
+            search_provider(contacts,  input("Provider: "))
+
+        elif op == 3:
+            same_number(contacts)
+
+        elif op == 4:
+            all_contacts(contacts)
+
+    # add new contacts to contact list
+    with open("contacts.txt", 'w') as f:
+        for obj in contacts:
+            f.writelines("%s %s %s\n" % (obj.name, obj.provider, obj.number))
 
 if __name__ == '__main__':
-	main()
+    main()
